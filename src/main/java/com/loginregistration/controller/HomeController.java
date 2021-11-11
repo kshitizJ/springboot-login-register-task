@@ -10,13 +10,15 @@ import com.loginregistration.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
+// import org.springframework.ui.Model;
+// import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+// import org.springframework.web.bind.annotation.ModelAttribute;
+// import org.springframework.web.bind.annotation.PathVariable;
 // import org.springframework.web.bind.annotation.RequestMapping;
 // import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class HomeController {
@@ -38,6 +40,14 @@ public class HomeController {
         } else {
             return "redirect:/login";
         }
+    }
+
+    @PostMapping("/updateUser")
+    public String updateProfile(@ModelAttribute("user") User user, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        User setUser = userService.saveUser(user);
+        session.setAttribute("user", setUser);
+        return "redirect:/";
     }
 
 }
