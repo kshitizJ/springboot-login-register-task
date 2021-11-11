@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Login</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="sign up/Login_form.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" th:href="@{/}">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto"></ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/login}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/register}">Register</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row" style="margin-top: 100px;">
+            <div class="col img">
+                <img style="margin-bottom: 100px;" src="images/undraw_Graduation_ktn0.svg" alt="Graduation">
+            </div>
+            <div class="col login-container">
+                <form th:action="@{/login}" method="post">
+                    <img class="avatar" src="images/undraw_profile_pic_ic5t.svg" alt="Profile">
+                    <h2>Welcome</h2>
+                    <div class="input-div one">
+                        <div class="i">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <div>
+                            <h5>Username</h5>
+                            <input class="input" name="email" type="text" required>
+                        </div>
+                    </div>
+                    <div class="input-div two">
+                        <div class="i">
+                            <i class="fa fa-lock"></i>
+                        </div>
+                        <div>
+                            <h5>Password</h5>
+                            <input class="input" name="password" type="password" required>
+                        </div>
+                    </div>
+                    <div th:if="${msg}" class="alert alert-error text-danger">
+                        Invalid username or password.
+                    </div>
+                    <a href="#">Forgot Password?</a>
+                    <input type="submit" class="btn" value="Login">
+					<a th:href="@{/register}">Sign Up</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+    crossorigin="anonymous"></script>
+<script src="sign up/Sign_up_form.js"></script>
+</html>
