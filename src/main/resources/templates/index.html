@@ -22,23 +22,20 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav">
-                <li class="nav-item active" th:if="${user != null}">
-                    <a class="nav-link" th:href="@{/{user}(user=${user})}">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active" th:unless="${user == null}">
+                <li class="nav-item active">
                     <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:if="${user != null}" th:href="@{/profile/{id}(id=${user.id})}">Profile</a>
+                    <a class="nav-link" th:if="${session.user}" th:href="@{/profile}">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:if="${user != null}" th:href="@{/logout/{user}(user=${user})}">Logout</a>
+                    <a class="nav-link" th:if="${session.user}" th:href="@{/logout}">Logout</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:unless="${user}" th:href="@{/login}">Login</a>
+                    <a class="nav-link" th:unless="${session.user}" th:href="@{/login}">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:unless="${user}" th:href="@{/register}">Register</a>
+                    <a class="nav-link" th:unless="${session.user}" th:href="@{/register}">Register</a>
                 </li>
             </ul>
         </div>

@@ -1,5 +1,10 @@
 package com.loginregistration.controller;
 
+import java.net.http.HttpRequest;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.loginregistration.model.User;
 import com.loginregistration.service.UserService;
 
@@ -10,8 +15,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+// import org.springframework.web.bind.annotation.RequestMapping;
+// import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HomeController {
@@ -19,26 +24,20 @@ public class HomeController {
     private UserService userService;
 
     @GetMapping({ "/", "/home" })
-    public String home(@ModelAttribute("user") User user, ModelMap map) {
-        if (user != null) {
-            map.addAttribute("user", user);
+    public String home(HttpSession session) {
+        Object user = session.getAttribute("user");
+        System.out.println("\n\n\n" + user + "\n\n\n");
+        return "index";
+    }
+
+    @GetMapping("/profile")
+    public String profile(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            return "profile";
         } else {
-            map.addAttribute("user", null);
+            return "redirect:/login";
         }
-        return "index";
-    }
-
-    @RequestMapping(value = { "/", "home" }, method = RequestMethod.POST)
-    public String home1(@ModelAttribute("user") User user, ModelMap map) {
-        map.addAttribute("user", user);
-        return "index";
-    }
-
-    @GetMapping("/profile/{id}")
-    public String profile(@PathVariable Long id, Model model) {
-        User user = userService.getUserById(id);
-        model.addAttribute("user", user);
-        return "profile";
     }
 
 }

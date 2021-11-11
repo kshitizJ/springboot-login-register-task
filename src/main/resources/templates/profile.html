@@ -25,17 +25,14 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav">
-                <li class="nav-item active" th:if="${user != null}">
-                    <a class="nav-link" th:href="@{/{user}(user=${user})}">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active" th:unless="${user == null}">
+                <li class="nav-item">
                     <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" th:href="@{/profile/{id}(id=${user.id})}">Profile</a>   
+                <li class="nav-item active">
+                    <a class="nav-link" th:if="${session.user}" th:href="@{/profile}">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                    <a class="nav-link" th:if="${session.user}" th:href="@{/logout}">Logout</a>
                 </li>
             </ul>
         </div>
@@ -46,7 +43,7 @@
                 <img style="margin-bottom: 100px;" src="images/undraw_account_490v.svg" alt="Account">
             </div>
             <div class="col login-container">
-                <form method="post" th:action="@{/updateUser}" th:object="${user}">
+                <form method="post" th:action="@{/updateUser}" th:object="${session.user}">
                     <img class="avatar" src="images/undraw_profile_pic_ic5t.svg" alt="Profile">
                     <h2>Welcome</h2>
                     <div class="input-div one">
@@ -54,8 +51,7 @@
                             <i class="fa fa-user"></i>
                         </div>
                         <div>
-                            <h5>First Name</h5>
-                            <input class="input" type="text" id="firstName" th:field="*{firstName}" name="firstName" required>
+                            <input class="input" type="text" id="firstName" th:value="*{firstName}" name="firstName" required>
                         </div>
                     </div>
                     <div class="input-div one">
@@ -63,8 +59,7 @@
                             <i class="fa fa-user"></i>
                         </div>
                         <div>
-                            <h5>Last Name</h5>
-                            <input class="input" type="text" id="lastName" th:field="*{lastName}" name="lastName" required>
+                            <input class="input" type="text" id="lastName" th:value="*{lastName}" name="lastName" required>
                         </div>
                     </div>
                     <div class="input-div one">
@@ -72,8 +67,7 @@
                             <i class="fa fa-envelope"></i>
                         </div>
                         <div>
-                            <h5>Email ID</h5>
-                            <input class="input" type="text" id="email" th:field="*{email}" name="email" required>
+                            <input class="input" type="text" id="email" th:value="*{email}" name="email" required>
                         </div>
                     </div>
                     <div class="input-div one">
@@ -81,8 +75,7 @@
                             <i class="fa fa-mobile"></i>
                         </div>
                         <div>
-                            <h5>Mobile No.</h5>
-                            <input class="input" type="text" id="mobileNo" th:field="*{mobileNo}" name="mobileNo" required>
+                            <input class="input" type="text" id="mobileNo" th:value="*{mobileNo}" name="mobileNo" required>
                         </div>
                     </div>
                     <div class="input-div two">
@@ -90,11 +83,10 @@
                             <i class="fa fa-lock"></i>
                         </div>
                         <div>
-                            <h5>New Password</h5>
-                            <input class="input" type="password" id="password" th:field="*{password}" name="password" required>
+                            <input class="input" type="password" id="password" th:value="*{password}" name="password" required>
                         </div>
                     </div>
-                    <input type="submit" class="btn" value="Sign Up">
+                    <input type="submit" class="btn" value="Submit">
                 </form>
             </div>
         </div>
